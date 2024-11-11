@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+using namespace std;
+//class
+
+class Node
+{
+    public:
+    Node*left;
+    int key;
+    Node*right;
+};
+
+//creating newnode
+
+Node*newnode(int data)
+{
+    Node*n=new Node();
+    n->left=NULL;
+    n->key=data;
+    n->right=NULL;
+    return n;
+}
+Node* insert(Node*root,int data)
+{
+    Node* nn=newnode(data);
+    if(root==NULL)
+    {
+        root=nn;
+        return root;
+    }
+    else
+    {
+queue<Node*>q;
+q.push(root);
+while(!q.empty())
+{
+    Node* present=q.front();
+    q.pop();
+    if(present->left==NULL)
+    {
+        present->left=nn;
+        break; 
+    }
+    else
+    {
+        q.push(present->left);
+    }
+    if(present->right==NULL)
+    {
+      
+        present->right=nn;
+           break; 
+    }
+    else
+    {
+       q.push(present->right); 
+    }
+}
+return root;
+    }
+}
+Node*display(Node*root)
+{
+    if(root==NULL)
+    {
+        cout<<"empty";
+    }
+    else
+    {
+queue<Node*>q;
+q.push(root);
+while(!q.empty())
+{
+    Node* present=q.front();
+    q.pop();
+     cout<<present->key<<" ";
+     if (present->left!=NULL) {
+            q.push(present->left);
+        }
+        if (present->right!=NULL) {
+            q.push(present->right);
+        }
+    }
+    }
+}
+int main()
+{
+    Node*root=NULL;
+    root=insert(root,10);
+    root=insert(root,10);
+    root=insert(root,5);
+    root=insert(root,10);
+    root=insert(root,10);
+    root=display(root);
+    
+}
